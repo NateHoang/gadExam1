@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Growth and Development Exam 1</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI',
+          'Ubuntu', 'Droid Sans', sans-serif, 'Meiryo';
+        padding: 0 12px;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-bottom: 24px;
+        width: 100%;
+      }
+      table > thead > tr > th,
+      table > tbody > tr > td {
+        padding: 5px 10px;
+      }
+      table > thead > tr > th {
+        text-align: left;
+        border-bottom: 1px solid;
+      }
+      table > tbody > tr + tr > td {
+        border-top: 1px solid;
+      }
+
+      .tooltip {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+      }
+      .tooltip img {
+        display: none;
+        position: absolute;
+        width: var(--tooltip-img-width, 300px);
+        height: auto;
+        border: 2px solid #f00;
+        background: #ffffcc;
+        padding: 5px;
+        z-index: 10;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(10px);
+        max-width: 90vw; /* ✅ prevents image from exceeding viewport width */
+        max-height: 80vh; /* ✅ keeps image inside visible page vertically */
+        object-fit: contain;
+        box-sizing: border-box;
+      }
+
+      .tooltip[data-position='below'] img {
+        bottom: auto;
+        top: 100%;
+      }
+
+      .tooltip:hover img {
+        display: block;
+        /* Reposition if too close to top or bottom of viewport */
+        top: auto;
+        bottom: auto;
+      }
+
+      .blurred {
+        filter: blur(3px);
+        transition: filter 0.3s ease;
+      }
+
+      table td:not(:first-child),
+      table td li {
+        cursor: pointer;
+      }
+
+      summary {
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 16px 0;
+      }
+
+      details {
+        border: 2px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+        background: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blur-buttons">
+      <button id="blurAll">Blur All</button>
+      <button id="unblurAll">Unblur All</button>
+    </div>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme:
+          document.body.classList.contains('vscode-dark') ||
+          document.body.classList.contains('vscode-high-contrast')
+            ? 'dark'
+            : 'default',
+      });
+    </script>
+    <my-header> Chromosomal / Microdeletion </my-header>
+    <table>
+      <thead>
+        <tr>
+          <th>Syndrome</th>
+          <th>Category</th>
+          <th>Key features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Down syndrome (Trisomy 21)</strong></td>
+          <td>Chromosomal (Trisomy 21)</td>
+          <td>
+            <ul>
+              <li>Intellectual disability</li>
+              <li>hypotonia</li>
+              <li>characteristic facies</li>
+              <li>cardiac defects</li>
+              <li>oral findings: Class III malocclusion</li>
+              <li>narrow palate</li>
+              <li>hypodontia</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Patau syndrome (Trisomy 13)</strong></td>
+          <td>Chromosomal (Trisomy 13)</td>
+          <td>
+            <ul>
+              <li>Severe CNS defects (holoprosencephaly)</li>
+              <li>polydactyly</li>
+              <li>microcephaly</li>
+              <li>often lethal</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Cri‑du‑chat (5p deletion)</strong></td>
+          <td>Chromosomal deletion</td>
+          <td>
+            <ul>
+              <li>High‑pitched cry</li>
+              <li>failure to thrive</li>
+              <li>hypotonia</li>
+              <li>intellectual delay</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Turner syndrome</strong></td>
+          <td>Sex chromosome (45,X or mosaic)</td>
+          <td>
+            <ul>
+              <li>Short stature</li>
+              <li>streak ovaries</li>
+              <li>lymphedema</li>
+              <li>neck webbing</li>
+              <li>congenital cardiac/renal defects</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Klinefelter syndrome (XXY)</strong></td>
+          <td>Sex chromosome (extra X)</td>
+          <td>
+            <ul>
+              <li>Hypogonadism</li>
+              <li>infertility</li>
+              <li>tall stature</li>
+              <li>feminized features</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>DiGeorge syndrome (22q11.2 deletion)</strong></td>
+          <td>Microdeletion (22q11.2)</td>
+          <td>
+            <ul>
+              <li>Cleft palate</li>
+              <li>congenital heart disease</li>
+              <li>thymic hypoplasia → T‑cell dysfunction</li>
+              <li>hypocalcemia (parathyroid)</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Prader‑Willi syndrome</strong></td>
+          <td>Imprinting disorder (paternal loss)</td>
+          <td>
+            <ul>
+              <li>Infant hypotonia/poor feeding</li>
+              <li>childhood hyperphagia</li>
+              <li>obesity</li>
+              <li>hypogonadism</li>
+              <li>intellectual disability</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Angelman syndrome</strong></td>
+          <td>Imprinting disorder (maternal loss)</td>
+          <td>
+            <ul>
+              <li>Severe intellectual disability</li>
+              <li>seizures</li>
+              <li>ataxia</li>
+              <li>inappropriate laughter</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <my-header>
+      Mendelian (single‑gene) — Autosomal dominant / recessive / X‑linked
+    </my-header>
+    <table>
+      <thead>
+        <tr>
+          <th>Syndrome</th>
+          <th>Category</th>
+          <th>Key features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Apert syndrome</strong></td>
+          <td>Mendelian — Autosomal dominant (craniosynostosis)</td>
+          <td>
+            <ul>
+              <li>Premature suture fusion</li>
+              <li>syndactyly</li>
+              <li>midface hypoplasia</li>
+              <li>dental crowding</li>
+              <li>possible cleft palate</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Crouzon syndrome</strong></td>
+          <td>Mendelian — Autosomal dominant (craniosynostosis)</td>
+          <td>
+            <ul>
+              <li>Midface hypoplasia</li>
+              <li>ocular proptosis</li>
+              <li>hypertelorism</li>
+              <li>variable skull shapes</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Achondroplasia</strong></td>
+          <td>Mendelian — Autosomal dominant</td>
+          <td>
+            <ul>
+              <li>
+                FGFR3 mutation → disproportionate short stature (dwarfism)
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Cleidocranial dysplasia</strong></td>
+          <td>Mendelian — Autosomal dominant</td>
+          <td>
+            <ul>
+              <li>Clavicle hypoplasia/aplasia</li>
+              <li>open sutures</li>
+              <li>supernumerary teeth</li>
+              <li>delayed eruption</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Cherubism</strong></td>
+          <td>Mendelian — Autosomal dominant</td>
+          <td>
+            <ul>
+              <li>Bilateral jaw swelling</li>
+              <li>multilocular radiolucencies</li>
+              <li>dental displacement</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong
+              >EEC syndrome (Ectrodactyly‑Ectodermal Dysplasia‑Clefting)</strong
+            >
+          </td>
+          <td>Mendelian — variable inheritance</td>
+          <td>
+            <ul>
+              <li>Lobster‑claw deformities (ectrodactyly)</li>
+              <li>ectodermal defects (hair/nails/teeth)</li>
+              <li>cleft lip/palate</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Ataxia‑Telangiectasia</strong></td>
+          <td>Mendelian — Autosomal recessive</td>
+          <td>
+            <ul>
+              <li>ATM mutation → cerebellar ataxia</li>
+              <li>telangiectasias</li>
+              <li>immunodeficiency</li>
+              <li>cancer risk</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Fragile X syndrome</strong></td>
+          <td>X‑linked (CGG repeat expansion)</td>
+          <td>
+            <ul>
+              <li>Intellectual disability (males)</li>
+              <li>long narrow face</li>
+              <li>large ears</li>
+              <li>macroorchidism</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Hunter syndrome (MPS II)</strong></td>
+          <td>X‑linked recessive (lysosomal storage)</td>
+          <td>
+            <ul>
+              <li>Iduronate sulfatase deficiency → GAG buildup</li>
+              <li>coarsened facies</li>
+              <li>hepatosplenomegaly</li>
+              <li>airway/cardio issues</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Hurler syndrome (MPS I)</strong></td>
+          <td>Autosomal recessive (lysosomal storage)</td>
+          <td>
+            <ul>
+              <li>IDUA mutation → severe MPS</li>
+              <li>coarse facies</li>
+              <li>corneal clouding</li>
+              <li>organomegaly</li>
+              <li>short life expectancy</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Papillon‑Lefèvre syndrome (PLS)</strong></td>
+          <td>Mendelian — Autosomal recessive</td>
+          <td>
+            <ul>
+              <li>CTSC mutation → palmoplantar hyperkeratosis</li>
+              <li>early aggressive periodontitis</li>
+              <li>tooth loss</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Gardner syndrome</strong></td>
+          <td>Mendelian — Autosomal dominant (APC gene)</td>
+          <td>
+            <ul>
+              <li>Hundreds of colon polyps (cancer risk)</li>
+              <li>extra teeth</li>
+              <li>osteomas/desmoid tumors</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <my-header>
+      Craniofacial / Neural crest (neurocristopathies) &amp; Sequence
+    </my-header>
+    <table>
+      <thead>
+        <tr>
+          <th>Syndrome / Sequence</th>
+          <th>Category</th>
+          <th>Key features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pierre Robin sequence</strong></td>
+          <td>Sequence (mandibular micrognathia → glossoptosis)</td>
+          <td>
+            <ul>
+              <li>Micrognathia → downward tongue</li>
+              <li>cleft palate</li>
+              <li>airway/feeding issues</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Van der Woude syndrome</strong></td>
+          <td>Craniofacial (autosomal dominant)</td>
+          <td>
+            <ul>
+              <li>Cleft lip/palate</li>
+              <li>paramedian lower lip pits</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Treacher‑Collins syndrome</strong></td>
+          <td>Neurocristopathy — Autosomal dominant</td>
+          <td>
+            <ul>
+              <li>Hypoplastic zygomas</li>
+              <li>mandibular hypoplasia</li>
+              <li>downward slanting palpebral fissures</li>
+              <li>hearing loss (conductive)</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Holoprosencephaly (HPE)</strong></td>
+          <td>Developmental malformation / syndromic cause</td>
+          <td>
+            <ul>
+              <li>
+                Forebrain midline failure → facial dysmorphism (cyclopia to mild
+                forms)
+              </li>
+              <li>severe neuro impairment</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>DiGeorge</strong> (also neurocristopathy)</td>
+          <td>(see above)</td>
+          <td>
+            <ul>
+              <li>See DiGeorge entry</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <my-header> Connective tissue / skeletal disorders </my-header>
+    <table>
+      <thead>
+        <tr>
+          <th>Syndrome</th>
+          <th>Category</th>
+          <th>Key features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ehlers‑Danlos syndrome</strong></td>
+          <td>Connective tissue disorder (various inheritance)</td>
+          <td>
+            <ul>
+              <li>Hyperextensible skin</li>
+              <li>hypermobile joints</li>
+              <li>easy bruising</li>
+              <li>types IV &amp; VIII → severe periodontal disease</li>
+              <li>aortic risk</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Marfan syndrome</strong></td>
+          <td>Connective tissue — Autosomal dominant</td>
+          <td>
+            <ul>
+              <li>Tall</li>
+              <li>arachnodactyly</li>
+              <li>aortic root dilation/aneurysm risk</li>
+              <li>high‑arched palate</li>
+              <li>TMJ issues</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Osteogenesis imperfecta</strong></td>
+          <td>Collagen defect (various inheritance)</td>
+          <td>
+            <ul>
+              <li>Fragile bones</li>
+              <li>blue sclerae</li>
+              <li>dentinogenesis imperfecta</li>
+              <li>hearing loss</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <my-header> Other / Vascular / Inflammatory / Non‑genetic </my-header>
+    <table>
+      <thead>
+        <tr>
+          <th>Syndrome</th>
+          <th>Category</th>
+          <th>Key features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong
+              >Progressive hemifacial hypoplasia (Parry‑Romberg
+              syndrome)</strong
+            >
+          </td>
+          <td>Non‑genetic, sporadic</td>
+          <td>
+            <ul>
+              <li>Unilateral facial atrophy</li>
+              <li>coup de sabre scleroderma</li>
+              <li>alopecia</li>
+              <li>delayed dental development</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Kawasaki disease</strong></td>
+          <td>Pediatric vasculitis (likely infectious trigger)</td>
+          <td>
+            <ul>
+              <li>Fever</li>
+              <li>rash</li>
+              <li>mucocutaneous changes</li>
+              <li>coronary artery inflammation → aneurysm risk</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <style>
+      /* same as before */
+      .blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+
+      /* Make clickable cursor for td */
+      table td:not(:first-child) {
+        cursor: pointer;
+      }
+
+      /* li inside blurred td will inherit blur from parent */
+      table td.blurred li {
+        filter: inherit;
+      }
+
+      .blur-buttons {
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .blur-buttons button {
+        margin: 0 5px;
+        padding: 5px 12px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .blur-section li {
+        cursor: pointer;
+        margin-bottom: 6px;
+      }
+
+      /* Blur effect same as td */
+      .blur-section li.blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+
+      /* Override for bold text so it always stays clear */
+      .blur-section li.blurred b {
+        filter: none !important;
+      }
+
+      .blur-section .blur-target {
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+    </style>
+    <script>
+      // === BLUR LOGIC ===
+      document.addEventListener('DOMContentLoaded', () => {
+        // Select table cells + blur-target spans
+        const blurCells = document.querySelectorAll(
+          'table td:not(:first-child), .blur-section .blur-target'
+        );
+
+        blurCells.forEach((cell) => {
+          cell.addEventListener('click', () => {
+            cell.classList.toggle('blurred');
+          });
+        });
+
+        // Keyboard shortcut (space toggles all)
+        document.addEventListener('keydown', (event) => {
+          if (event.code === 'Space') {
+            const allBlurred = Array.from(blurCells).every((cell) =>
+              cell.classList.contains('blurred')
+            );
+            if (allBlurred) {
+              blurCells.forEach((cell) => cell.classList.remove('blurred'));
+            } else {
+              blurCells.forEach((cell) => cell.classList.add('blurred'));
+            }
+            event.preventDefault();
+          }
+        });
+
+        // Buttons
+        document.getElementById('blurAll').addEventListener('click', () => {
+          blurCells.forEach((cell) => cell.classList.add('blurred'));
+        });
+        document.getElementById('unblurAll').addEventListener('click', () => {
+          blurCells.forEach((cell) => cell.classList.remove('blurred'));
+        });
+      });
+
+      // === CUSTOM HEADER ELEMENT ===
+      class MyHeader extends HTMLElement {
+        connectedCallback() {
+          const text = this.innerHTML.trim() || 'Section Title';
+
+          this.innerHTML = `
+        <div
+          style="
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            --tooltip-img-width: 400px;
+          "
+        >
+          ${text}
+        </div>
+        <br />
+      `;
+        }
+      }
+
+      // Important: name must contain a hyphen
+      customElements.define('my-header', MyHeader);
+    </script>
+  </body>
+</html>
